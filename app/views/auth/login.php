@@ -1,20 +1,20 @@
-<?php
-    require __DIR__ . '/../partiels/header.php'
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minerva - Acceuil</title>
+    <title>Minerva - Nouveaux Compte</title>
     <link rel="stylesheet" href="../../public/styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<?php
+    require __DIR__ . '/../partiels/header.php'
+
+?>
 <body>
     
     <main>
-        <div class="lignes"><img src="/../../../imgs/lignes.png" alt=""></div>
+        <div class="lignes"><img src="../../../imgs/lignes.png" alt=""></div>
         <section class="section_titres">
             <div class="sous_titre1">
             <i class="fa-solid fa-bahai" style="color: #FFD43B;"></i>
@@ -27,7 +27,7 @@
         </section>
         <section class="section_imgs">
             <div class="cercle_blue"></div>
-            <div class="cercle_rouge"><img src="../../imgs/logo_central.png" alt=""></div>
+            <div class="cercle_rouge"><img src="../../../imgs/logo_central.png" alt=""></div>
         </section>
     </main>
     <section class="fonctionnalites_principales">
