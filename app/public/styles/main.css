@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Aclonica&family=Adamina&family=Afacad:ital,wght@0,400..700;1,400..700&family=Alkalami&family=Henny+Penny&family=Imprima&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inspiration&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Langar&family=Patua+One&family=Rakkas&family=Raleway:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --acent-white : #FFFFFF;
+    --acent-bluedark : #003049;
+    --acent-red : #F07167;
+    --acent-blueciel : #5ABDF1;
+    --acent-yellow : #EA950D;
+    --accent_grey : #DEE2E6;
+}
+*{
+    font-family: Afacad;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+body{
+    overflow-x: hidden;
+}
+li{
+    list-style: none;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+header .annonce{
+    background-color: #003049;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--acent-white);
+    font-size: 1.1rem;
+    padding: 25px 0;
+}
+header .annonce span{
+    color: var(--acent-yellow);
+}
+header .logo_principale{
+    width: 10%;
+    margin: 20px;
+}
+header .logo_principale img{
+    width: 100%;
+}
+.navbar ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+.navbar{
+    width: 68%;
+    display: flex;
+    justify-content: space-between;
+}
+.navbar a{
+    color: var(--acent-bluedark);
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 12px 20px;
+}
+.navbar_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .active{
+    color: var(--acent-blueciel);
+    text-shadow: 10px 10px 45px var(--acent-blueciel);
+}
+header .liste_droit{
+    display: flex;justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+header .liste_droit a{
+    padding: 0 20px;
+}
+header .liste_droit .border_droit{
+    border-right: 1px solid var(--acent-bluedark);
+}
+main .sous_titre1 h4{
+    color: var(--acent-red);
+    font-family: Afacad;
+    font-size: 1.7rem;
+    margin: 50px 0;
+}
+main .section_titres h1{
+    width: 40%;
+    font-size: 2.5rem;
+    color: var(--acent-bluedark);
+    margin: 50px 0;
+}
+main .animation_flechs{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: var(--acent-bluedark);
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0.1px;
+}
+main{
+    display: flex;
+    justify-content: space-between;
+    padding:100px 50px 100px 50px;
+    background-color: var(--accent_grey);
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+main .nv_compte{
+    background: var(--acent-red);
+    color: var(--acent-bluedark);
+    font-weight: 700;
+    padding: 13px 35px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+main .section_imgs{
+    position: relative;
+    width: 40%;
+}
+main .section_imgs .cercle_blue{
+    background: var(--acent-blueciel);
+    z-index: 1;
+    width: 80%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    left : 100px;
+    animation: cercle_blue 2s ease-in-out backwards;
+}
+main .section_imgs .cercle_rouge{
+    background: var(--acent-red);
+    width: 80%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 999;
+    position: absolute;
+    animation: cercle_rouge 2s ease-in-out backwards;
+}
+main .section_imgs .cercle_rouge img{
+    width: 105%;
+    animation: cercle_img 1s 2s ease-in-out backwards;
+}
+@keyframes cercle_blue{
+    0%{
+        opacity: 0;
+        left: -300px;
+    }
+}
+@keyframes cercle_rouge{
+    0%{
+        left: 600px;
+    }
+}
+@keyframes cercle_img{
+    0%{
+        opacity: 0;
+
+    }
+}
+@keyframes lignes{
+    0%{
+        opacity: 0;
+        scale: 1.5;
+    }
+
+}
+main .lignes{
+    position: absolute;
+    right: 1%;
+    top: 25%;
+    width: 7%;
+    animation: lignes .8s 2s ease-in-out backwards;
+}
+main .lignes img{
+    width: 100%;
+}
+main .sous_titre1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+main .sous_titre1 i{
+    font-size: 1.6rem;
+
+
+}
+ .titre_section{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+ }
+ .titre_section h1{
+    font-size: 2.2rem;
+    margin: 50px 0 ;
+    color: var(--acent-bluedark);
+    text-align: center;
+    padding-bottom: 13px;
+    border-bottom: 3px solid var(--acent-yellow);
+    margin: 100px 0;
+
+}
+.fonctionnalites_principales .titre_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fonctionnalites_principales i{
+    color: var(--acent-blueciel);
+    font-size: 2rem;
+    text-align: center;
+}
+.fontionnalite_entete h3{
+    color: var(--acent-blueciel);
+    margin: 10px 0;
+    font-size: 1.5rem;
+}
+.fonctionnalite{
+    border: 2px solid var(--acent-bluedark);
+    width: 35%;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #F3F4F5;
+    height: 400px;
+}
+.fontionnalite_entete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.fonctionnalites_principales .fonctionnalite .pas div{
+    border: 2.5px solid var(--acent-red);
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+}
+.fonctionnalites_principales .fonctionnalite .pas{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-direction: column;
+    margin: 30px;
+}
+.fonctionnalite .auth_pas{
+    width: 60%;
+}
+.fonctionnalite .auth_pas img{
+    width: 100%;
+}
+.pas_contenair {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.contenair_fonctionnalites{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    flex-wrap: wrap;
+}
+.pas_contenair .pas p{
+    position: absolute;
+    top: 0;
+    left : 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--acent-red);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: var(--acent-white);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.pas_contenair .pas h4{
+    color: var(--acent-bluedark);
+}
+.pas_contenair .pas h4 span{
+    color: var(--acent-red);
+}
+.titre_contenair{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px ;
+}
+.titre_contenair a{
+    color: var(--accent_grey);
+    font-size: 1.1rem;
+    background: var(--acent-bluedark);
+    padding: 13px 45px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+.cours_populaires .cours{
+    height: 400px;
+    width: 25%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border: 2px solid var(--acent-bluedark);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 3px;
+}
+.cours_populaires{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.cours_populaires .cours .cours_btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: url('../../../imgs/test.jpg') no-repeat center/cover;
+    color: var(--acent-bluedark);
+    font-weight: 700;
+    font-size: .8rem;
+    height: 60%;
+}
+.cours_populaires .cours .cours_btns p{
+    background: var(--accent_grey);
+    padding: 10px 35px;
+    margin: 20px;
+    border-radius: 7px;
+}
+.cours_populaires .cours .cours_btns i{
+    background: var(--accent_grey);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 50%;
+}
+.cours_populaires .cours h3{
+    margin: 20px 0;
+}
+.sciences_btns{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    color: var(--acent-red);
+    font-size: 1.1rem;
+    padding: 0 10px;
+
+}
+.cours_populaires .cours{
+    background: #DEE2E6;
+}
+.cours_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    font-weight: 700;
+}
+.cours_footer p:first-child{
+    color: var(--acent-red);
+}
+.section_contact form{
+    border: 3px solid var(--acent-bluedark);
+    width: 40%;
+    padding: 30px;
+    border-radius: 8px;
+
+
+}
+.section_contact form p{
+    text-align: center;
+    color: var(--acent-bluedark);
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+}
+.section_contact form  input, select, textarea{
+    width: 70%;    
+    margin: 10px 12%;
+    border: 2px solid var(--acent-red);
+    padding: 10px;
+    color: var(--acent-bluedark);
+    border-radius: 8px;
+    outline: none;
+}
+.section_contact form textarea{
+    height: 200px;
+}
+.form_contenair{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section_contact form  input::placeholder, select::placeholder, textarea::placeholder{
+    color: var(--acent-red);
+}
+input[type="submit"]{
+    background: var(--acent-red);
+}
+
+
+footer{
+    color: var(--accent_grey);
+    background: var(--acent-bluedark);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px ;
+    align-items: center;
+    margin-top: 120px;
+    
+}
+.video_contenaire{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.video_contenaire .videos_titres h1{
+    color: #5ABDF1;
+    font-size: 2.3rem;
+    width: 85%;
+}
+.video_contenaire .videos_titres p{
+    color: var(--acent-bluedark);
+    font-style: 1.2rem;
+    width: 70%;
+    margin: 20px 0;
+}
+
+footer h3{
+    color: var(--acent-blueciel);
+    font-size: 1.4rem;
+    margin: 15px 0;
+}
+footer .first_part p{
+    width: 50%;
+    margin: 10px 0;
+}
+footer .fourth_part p{
+    width: 50%;
+}
+footer .fourth_part input{
+    border: 2px solid var(--acent-red);
+    background: var(--accent_grey);
+    width: 40%;
+    padding: 8px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+
+}
+footer .fourth_part input[type="submit"]{
+    background: var(--acent-blueciel);
+    color: var(--acent-bluedark);
+    border: #5ABDF1;
+    font-weight: 700;
+}
