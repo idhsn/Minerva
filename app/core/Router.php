@@ -16,9 +16,9 @@ class Router
 
     public function dispatch($uri)
     {
-        $path = parse_url($uri, PHP_URL_PATH); // /students
-        $method = $_SERVER['REQUEST_METHOD']; // GET
-        $action = $this->routes[$method][$path] ?? null; // ['HomeController', 'students']
+        $path = parse_url($uri, PHP_URL_PATH);
+        $method = $_SERVER['REQUEST_METHOD'];
+        $action = $this->routes[$method][$path] ?? null;
 
         if (!$action) {
             http_response_code(404);
@@ -27,7 +27,6 @@ class Router
         }
 
         $controllerName = $action[0];
-
         $methodName = $action[1];
 
         require_once __DIR__ . '/../controllers/' . $controllerName . '.php';
