@@ -51,7 +51,7 @@ $user = $authService->getCurrentUser();
                     <div class="card-body">
                         <h5 class="card-title">Works</h5>
                         <p class="card-text">Create and assign works</p>
-                        <a href="#" class="btn btn-secondary disabled">Coming Soon</a>
+                        <a href="/teacher/works" class="btn btn-primary">Manage Works</a>
                     </div>
                 </div>
             </div>

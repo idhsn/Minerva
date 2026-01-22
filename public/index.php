@@ -23,6 +23,13 @@ $router->get('/teacher/students', ['StudentController', 'index']);
 $router->get('/teacher/students/create', ['StudentController', 'create']);
 $router->post('/teacher/students/create', ['StudentController', 'create']);
 
+// Work routes
+$router->get('/teacher/works', ['WorkController', 'index']);
+$router->get('/teacher/works/create', ['WorkController', 'create']);
+$router->post('/teacher/works/create', ['WorkController', 'create']);
+$router->get('/teacher/works/assign', ['WorkController', 'assign']);
+$router->post('/teacher/works/assign', ['WorkController', 'assign']);
+
 // Student routes
 $router->get('/student/dashboard', ['StudentController', 'dashboard']);
 
