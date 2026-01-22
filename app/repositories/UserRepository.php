@@ -46,4 +46,29 @@ class UserRepository
         
         return $this->pdo->lastInsertId();
     }
+
+    public function findByClassId($classId)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE class_id = ? AND role = 'student'");
+        $stmt->execute([$classId]);
+        
+        $students = [];
+        while ($data = $stmt->fetch()) {
+            $students[] = new User($data);
+        }
+        
+        return $students;
+    }
+
+    public function findAllStudents()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE role = 'student' ORDER BY created_at DESC");
+        
+        $students = [];
+        while ($data = $stmt->fetch()) {
+            $students[] = new User($data);
+        }
+        
+        return $students;
+    }
 }

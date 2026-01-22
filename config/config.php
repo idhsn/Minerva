@@ -2,7 +2,7 @@
 
 return [
     'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=minerva;charset=utf8mb4',
+        'dsn' => 'mysql:host=localhost;dbname=minerva_db;charset=utf8mb4',
         'user' => 'root',
         'pass' => '',
         'options' => [

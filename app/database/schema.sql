@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS minerva;
-USE minerva;
+CREATE DATABASE IF NOT EXISTS minerva_db;
+USE minerva_db;
 
 -- Table 1: users (teachers AND students)
 CREATE TABLE users (
