@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Core;
+
 class Router
 {
     private $routes = [];
@@ -16,9 +18,10 @@ class Router
 
     public function dispatch($uri)
     {
-        $path = parse_url($uri, PHP_URL_PATH); // /students
-        $method = $_SERVER['REQUEST_METHOD']; // GET
-        $action = $this->routes[$method][$path] ?? null; // ['HomeController', 'students']
+        $path = parse_url($uri, PHP_URL_PATH);
+        $path = '/' . ltrim($path, '/');
+        $method = $_SERVER['REQUEST_METHOD'];
+        $action = $this->routes[$method][$path] ?? null;
 
         if (!$action) {
             http_response_code(404);
@@ -26,13 +29,14 @@ class Router
             return;
         }
 
-        $controllerName = $action[0];
-
+        $controllerName = "App\\Controllers\\" . $action[0];
         $methodName = $action[1];
 
-        require_once __DIR__ . '/../controllers/' . $controllerName . '.php';
-
-        $controller = new $controllerName();
-        $controller->$methodName();
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName();
+            $controller->$methodName();
+        } else {
+            die("Controller $controllerName not found");
+        }
     }
 }

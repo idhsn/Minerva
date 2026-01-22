@@ -5,11 +5,13 @@ namespace App\Core;
 use PDO;
 use PDOException;
 
-class Model{
+class Model
+{
     protected $db;
 
-    public function __construct(){
-        $this->db = Database::getInstance()::getConnection();
+    public function __construct()
+    {
+        $this->db = Database::connection();
     }
 }
 
