@@ -26,17 +26,17 @@ $user = $authService->getCurrentUser();
         <h1>Welcome Teacher! 👨‍🏫</h1>
         
         <div class="row mt-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">My Classes</h5>
-                        <p class="card-text">View and manage your classes</p>
+                        <p class="card-text">View and manage classes</p>
                         <a href="/teacher/classes" class="btn btn-primary">Go to Classes</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">Students</h5>
@@ -46,12 +46,22 @@ $user = $authService->getCurrentUser();
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">Works</h5>
                         <p class="card-text">Create and assign works</p>
                         <a href="/teacher/works" class="btn btn-primary">Manage Works</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Attendance</h5>
+                        <p class="card-text">Take attendance</p>
+                        <a href="/teacher/attendance" class="btn btn-primary">Manage Attendance</a>
                     </div>
                 </div>
             </div>

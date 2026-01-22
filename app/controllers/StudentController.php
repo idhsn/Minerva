@@ -3,23 +3,28 @@
 require_once __DIR__ . '/../services/AuthService.php';
 require_once __DIR__ . '/../services/StudentService.php';
 require_once __DIR__ . '/../services/ClassService.php';
+require_once __DIR__ . '/../services/WorkService.php';
+require_once __DIR__ . '/../services/SubmissionService.php';
 
 class StudentController
 {
     private $authService;
     private $studentService;
     private $classService;
+    private $workService;
+    private $submissionService;
 
     public function __construct()
     {
         $this->authService = new AuthService();
         $this->studentService = new StudentService();
         $this->classService = new ClassService();
+        $this->workService = new WorkService();
+        $this->submissionService = new SubmissionService();
     }
 
     public function dashboard()
     {
-        // Check if user is student
         if (!$this->authService->isStudent()) {
             header('Location: /login');
             exit;
@@ -30,7 +35,6 @@ class StudentController
 
     public function index()
     {
-        // Check if user is teacher
         if (!$this->authService->isTeacher()) {
             header('Location: /login');
             exit;
@@ -42,7 +46,6 @@ class StudentController
 
     public function create()
     {
-        // Check if user is teacher
         if (!$this->authService->isTeacher()) {
             header('Location: /login');
             exit;
@@ -52,7 +55,6 @@ class StudentController
         $success = null;
         $generatedPassword = null;
 
-        // Get all classes for dropdown
         $user = $this->authService->getCurrentUser();
         $classes = $this->classService->getTeacherClasses($user->id);
 
@@ -73,5 +75,86 @@ class StudentController
         }
 
         require_once __DIR__ . '/../views/teacher/students/create.php';
+    }
+
+    public function works()
+    {
+        if (!$this->authService->isStudent()) {
+            header('Location: /login');
+            exit;
+        }
+
+        $user = $this->authService->getCurrentUser();
+        $works = $this->workService->getStudentWorks($user->id);
+
+        require_once __DIR__ . '/../views/student/works/index.php';
+    }
+
+    public function submitWork()
+    {
+        if (!$this->authService->isStudent()) {
+            header('Location: /login');
+            exit;
+        }
+
+        $workId = $_GET['id'] ?? null;
+
+        if (!$workId) {
+            header('Location: /student/works');
+            exit;
+        }
+
+        $user = $this->authService->getCurrentUser();
+        $work = $this->workService->getWorkById($workId);
+        
+        if (!$work) {
+            header('Location: /student/works');
+            exit;
+        }
+
+        // Check if already submitted
+        $existingSubmission = $this->submissionService->getSubmissionByWorkAndStudent($workId, $user->id);
+
+        $error = null;
+        $success = null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $content = $_POST['content'] ?? '';
+
+            $result = $this->submissionService->submitWork($workId, $user->id, $content);
+
+            if ($result['success']) {
+                $success = $result['message'];
+                header("refresh:2;url=/student/works");
+            } else {
+                $error = $result['message'];
+            }
+        }
+
+        require_once __DIR__ . '/../views/student/works/submit.php';
+    }
+
+    public function grades()
+    {
+        if (!$this->authService->isStudent()) {
+            header('Location: /login');
+            exit;
+        }
+
+        $user = $this->authService->getCurrentUser();
+        $works = $this->workService->getStudentWorks($user->id);
+        
+        $gradesData = [];
+        foreach ($works as $work) {
+            $submission = $this->submissionService->getSubmissionByWorkAndStudent($work->id, $user->id);
+            if ($submission) {
+                $gradesData[] = [
+                    'work' => $work,
+                    'submission' => $submission
+                ];
+            }
+        }
+
+        require_once __DIR__ . '/../views/student/grades.php';
     }
 }

@@ -16,6 +16,8 @@ $user = $authService->getCurrentUser();
         <div class="container-fluid">
             <span class="navbar-brand">Minerva - Student Dashboard</span>
             <div>
+                <a href="/student/works" class="btn btn-outline-light btn-sm me-2">My Works</a>
+                <a href="/student/grades" class="btn btn-outline-light btn-sm me-2">Grades</a>
                 <span class="text-white me-3">Welcome, <?= $user->getFullName() ?></span>
                 <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
             </div>
@@ -24,7 +26,28 @@ $user = $authService->getCurrentUser();
 
     <div class="container mt-5">
         <h1>Welcome Student! 🎓</h1>
-        <p>This is your dashboard. More features coming soon...</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">My Works</h5>
+                        <p class="card-text">View and submit assigned works</p>
+                        <a href="/student/works" class="btn btn-primary">Go to Works</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">My Grades</h5>
+                        <p class="card-text">View your grades and feedback</p>
+                        <a href="/student/grades" class="btn btn-primary">View Grades</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

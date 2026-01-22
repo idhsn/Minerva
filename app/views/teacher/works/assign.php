@@ -11,7 +11,7 @@ $assignedIds = array_map(function($student) {
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title mb-1">Assign Work to Students</h3>
+                    <h3 class="card-title mb-1">Aessign Work to Students</h3>
                     <p class="text-muted mb-4">Work: <strong><?= htmlspecialchars($work->title) ?></strong></p>
 
                     <?php if (isset($error)): ?>
@@ -28,7 +28,7 @@ $assignedIds = array_map(function($student) {
                         </div>
                         <a href="/teacher/students/create" class="btn btn-primary">Create Student</a>
                     <?php else: ?>
-                        <form method="POST" action="/teacher/works/assign?id=<?= $work->id ?>">
+                        <form method="POST" action="/teacher/works/assign?id=<?= $work->id  ?>">
                             <div class="mb-3">
                                 <label class="form-label">Select Students (multiple)</label>
                                 <div class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">

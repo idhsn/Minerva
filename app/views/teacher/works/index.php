@@ -24,7 +24,10 @@
                                     Created: <?= date('M d, Y', strtotime($work->created_at)) ?>
                                 </small>
                             </p>
-                            <a href="/teacher/works/assign?id=<?= $work->id ?>" class="btn btn-sm btn-primary">Assign to Students</a>
+                            <div class="d-flex gap-2">
+                                <a href="/teacher/works/assign?id=<?= $work->id ?>" class="btn btn-sm btn-primary">Assign Students</a>
+                                <a href="/teacher/works/submissions?id=<?= $work->id ?>" class="btn btn-sm btn-success">View Submissions</a>
+                            </div>
                         </div>
                     </div>
                 </div>

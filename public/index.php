@@ -29,9 +29,22 @@ $router->get('/teacher/works/create', ['WorkController', 'create']);
 $router->post('/teacher/works/create', ['WorkController', 'create']);
 $router->get('/teacher/works/assign', ['WorkController', 'assign']);
 $router->post('/teacher/works/assign', ['WorkController', 'assign']);
+$router->get('/teacher/works/submissions', ['WorkController', 'submissions']);
+$router->get('/teacher/works/grade', ['WorkController', 'grade']);
+$router->post('/teacher/works/grade', ['WorkController', 'grade']);
+
+// Attendance routes
+$router->get('/teacher/attendance', ['AttendanceController', 'index']);
+$router->get('/teacher/attendance/take', ['AttendanceController', 'take']);
+$router->post('/teacher/attendance/take', ['AttendanceController', 'take']);
+$router->get('/teacher/attendance/stats', ['AttendanceController', 'stats']);
 
 // Student routes
 $router->get('/student/dashboard', ['StudentController', 'dashboard']);
+$router->get('/student/works', ['StudentController', 'works']);
+$router->get('/student/works/submit', ['StudentController', 'submitWork']);
+$router->post('/student/works/submit', ['StudentController', 'submitWork']);
+$router->get('/student/grades', ['StudentController', 'grades']);
 
 // Dispatch
 $uri = $_SERVER['REQUEST_URI'];
