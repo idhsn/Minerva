@@ -1,0 +1,51 @@
+[2026-01-23 11:52:05] TO: mouadsbaer@gmail.com | SUBJECT: Bienvenue chez Minerva - Vos identifiants
+CONTENT: 
+        
+        
+            
+                .container { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .header h1 { color: #003049; }
+                .content { background: #f9f9f9; padding: 20px; border-radius: 5px; }
+                .credentials { background: #fff; padding: 15px; border-left: 4px solid #5ABDF1; margin: 20px 0; }
+                .footer { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #888; }
+                .button { display: inline-block; padding: 10px 20px; background: #5ABDF1; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+            
+        
+        
+            
+                
+                    Minerva
+                    Votre plateforme éducative
+                
+                
+                    Bonjour mouad test,
+                    Bienvenue chez Minerva ! Votre compte étudiant a été créé par votre enseignant.
+                    Voici vos identifiants pour vous connecter à la plateforme :
+                    
+                    
+                        Email : mouadsbaer@gmail.com
+                        Mot de passe : 0381530ae6
+                    
+
+                    
+                        Me connecter
+                    
+
+                    Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :
+                    http://localhost/php_briefs/Minerva_binomes/login
+                
+                
+                    &copy; 2026 Minerva. Tous droits réservés.
+                
+            
+        
+        
+        
+--------------------------------------------------
+[2026-01-23 11:55:29] TO: mouadsbaer@gmail.com | SUBJECT: Bienvenue chez Minerva - Vos identifiants
+BODY: Minerva Votre plateforme éducative Bonjour mouad test, Bienvenue chez Minerva ! Votre compte étudiant a été créé par votre enseignant. Voici vos identifiants pour vous connecter à la plateforme : Email : mouadsbaer@gmail.com Mot de passe : 5ff91d6021 Me connecter Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur : http://localhost/php_briefs/Minerva_binomes/login &copy; 2026 Minerva. Tous droits réservés.
+--------------------------------------------------
+[2026-01-23 11:56:12] TO: mouadsbaer@gmail.com | SUBJECT: Bienvenue chez Minerva - Vos identifiants
+BODY: Minerva Votre plateforme éducative Bonjour mouad test, Bienvenue chez Minerva ! Votre compte étudiant a été créé par votre enseignant. Voici vos identifiants pour vous connecter à la plateforme : Email : mouadsbaer@gmail.com Mot de passe : 943f319b0c Me connecter Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur : http://localhost/php_briefs/Minerva_binomes/login &copy; 2026 Minerva. Tous droits réservés.
+--------------------------------------------------
