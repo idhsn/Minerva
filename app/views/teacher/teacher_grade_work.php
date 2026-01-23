@@ -201,7 +201,8 @@
     <div class="main_content">
         <div class="section_header">
             <div>
-                <a href="teacher_works.php" style="color: #666; text-decoration: none; font-size: 0.9rem;"><i
+                <a href="/php_briefs/Minerva_binomes/teacher/assignments"
+                    style="color: #666; text-decoration: none; font-size: 0.9rem;"><i
                         class="fa-solid fa-arrow-left"></i> Retour aux travaux</a>
                 <h1 style="margin-top: 5px;">Noter: Création Landing Page</h1>
             </div>

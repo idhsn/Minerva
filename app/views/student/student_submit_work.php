@@ -182,7 +182,7 @@
     <div class="main_content">
         <div class="section_header">
             <div>
-                <a href="/minerva_binomes/student/dashboard"
+                <a href="/php_briefs/Minerva_binomes/student/dashboard"
                     style="color: #666; text-decoration: none; font-size: 0.9rem;"><i
                         class="fa-solid fa-arrow-left"></i> Retour au tableau de bord</a>
                 <h1 style="margin-top: 5px;">Soumettre un Devoir</h1>
@@ -203,7 +203,7 @@
                         <div class="meta_item">
                             <div class="meta_icon"><i class="fa-solid fa-file-arrow-down"></i></div>
                             <div>Ressources: <a
-                                    href="/minerva_binomes/public/uploads/assignments/<?= $assignment['file_path'] ?>"
+                                    href="/php_briefs/Minerva_binomes/public/uploads/assignments/<?= $assignment['file_path'] ?>"
                                     download style="color: #5ABDF1;">Télécharger le sujet</a></div>
                         </div>
                     <?php endif; ?>
@@ -217,7 +217,7 @@
 
             <div class="submission_form">
                 <h3 style="margin-top: 0;">Votre Travail</h3>
-                <form action="/minerva_binomes/student/submit" method="POST" enctype="multipart/form-data">
+                <form action="/php_briefs/Minerva_binomes/student/submit" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="assignment_id" value="<?= $assignment['id'] ?>">
 
                     <label style="display: block; margin-bottom: 10px; font-weight: 500; color: #444;">Fichiers

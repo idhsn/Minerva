@@ -184,18 +184,31 @@
     <div class="main_content">
         <div class="section_header">
             <div>
-                <h1>Assigner un Nouveau Devoir</h1>
-                <p style="color: #666;">Créez et distribuez un devoir à vos classes</p>
+                <h1><?= isset($assignment) ? 'Modifier le Devoir' : 'Assigner un Nouveau Devoir' ?></h1>
+                <p style="color: #666;">
+                    <?= isset($assignment) ? 'Modifiez les détails du devoir ci-dessous' : 'Créez et distribuez un devoir à vos classes' ?>
+                </p>
             </div>
-            <a href="teacher_works.php" class="btn btn_secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            <a href="/php_briefs/Minerva_binomes/teacher/assignments" class="btn btn_secondary"><i
+                    class="fa-solid fa-arrow-left"></i> Retour</a>
         </div>
 
         <div class="form_card">
-            <form action="/minerva_binomes/teacher/assignments/create" method="POST" enctype="multipart/form-data">
+            <?php
+            $action = isset($assignment)
+                ? "/php_briefs/Minerva_binomes/teacher/assignments/update"
+                : "/php_briefs/Minerva_binomes/teacher/assignments/create";
+            ?>
+            <form action="<?= $action ?>" method="POST" enctype="multipart/form-data">
+                <?php if (isset($assignment)): ?>
+                    <input type="hidden" name="id" value="<?= $assignment['id'] ?>">
+                <?php endif; ?>
+
                 <div class="form_group">
                     <label for="title">Titre du Devoir</label>
                     <input type="text" id="title" name="title" class="form_control"
-                        placeholder="Ex: Projet Final - PHP MVC" required>
+                        placeholder="Ex: Projet Final - PHP MVC" required
+                        value="<?= isset($assignment) ? htmlspecialchars($assignment['title']) : '' ?>">
                 </div>
 
                 <div class="form_group">
@@ -203,7 +216,9 @@
                     <select id="class" name="class_id" class="form_control" required>
                         <option value="">Sélectionnez une classe...</option>
                         <?php foreach ($classes as $class): ?>
-                            <option value="<?= $class['id'] ?>"><?= htmlspecialchars($class['name']) ?></option>
+                            <option value="<?= $class['id'] ?>" <?= (isset($assignment) && $assignment['class_id'] == $class['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($class['name']) ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -211,21 +226,29 @@
                 <div class="form_group">
                     <label for="description">Instructions / Description</label>
                     <textarea id="description" name="description" class="form_control"
-                        placeholder="Détaillez les consignes du devoir ici..."></textarea>
+                        placeholder="Détaillez les consignes du devoir ici..."><?= isset($assignment) ? htmlspecialchars($assignment['description']) : '' ?></textarea>
                 </div>
 
                 <div class="form_group">
                     <label>Ressources / Fichiers Joints</label>
+                    <?php if (isset($assignment) && $assignment['file_path']): ?>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">
+                            <i class="fa-solid fa-paperclip"></i> Fichier actuel: <?= basename($assignment['file_path']) ?>
+                        </p>
+                    <?php endif; ?>
                     <div class="file_upload" onclick="document.getElementById('file').click()">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <p>Cliquez ou glissez des fichiers ici</p>
+                        <p><?= isset($assignment) ? 'Remplacer le fichier' : 'Cliquez ou glissez des fichiers ici' ?>
+                        </p>
                         <input type="file" id="file" name="file" style="display: none;">
                     </div>
                 </div>
 
                 <div class="form_actions">
-                    <a href="/minerva_binomes/teacher/dashboard" class="btn btn_secondary">Annuler</a>
-                    <button type="submit" class="btn btn_primary">Assigner le Devoir</button>
+                    <a href="/php_briefs/Minerva_binomes/teacher/assignments" class="btn btn_secondary">Annuler</a>
+                    <button type="submit" class="btn btn_primary">
+                        <?= isset($assignment) ? 'Mettre à jour le Devoir' : 'Assigner le Devoir' ?>
+                    </button>
                 </div>
             </form>
         </div>

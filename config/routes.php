@@ -16,12 +16,17 @@ return function ($router) {
     // Teacher routes
     $router->get('/teacher/dashboard', ['TeacherController', 'dashboard']);
     $router->get('/teacher/classes', ['TeacherController', 'createClass']);
+    $router->post('/teacher/classes', ['TeacherController', 'createClass']);
     $router->get('/teacher/classes/create', ['TeacherController', 'createClass']);
     $router->post('/teacher/classes/create', ['TeacherController', 'createClass']);
-    $router->get('/teacher/students', ['TeacherController', 'createStudent']);
-    $router->post('/teacher/students', ['TeacherController', 'createStudent']);
+    $router->get('/teacher/students', ['TeacherController', 'manageStudents']);
+    $router->post('/teacher/students', ['TeacherController', 'manageStudents']);
+    $router->get('/teacher/assignments', ['TeacherController', 'listAssignments']);
     $router->get('/teacher/assignments/create', ['TeacherController', 'createAssignment']);
     $router->post('/teacher/assignments/create', ['TeacherController', 'createAssignment']);
+    $router->get('/teacher/assignments/edit', ['TeacherController', 'editAssignment']);
+    $router->post('/teacher/assignments/update', ['TeacherController', 'updateAssignment']);
+    $router->get('/teacher/assignments/delete', ['TeacherController', 'deleteAssignment']);
 
     // Student routes
     $router->get('/student/dashboard', ['StudentController', 'dashboard']);

@@ -24,7 +24,7 @@
             </div>
             <h1>plateforme de gestion académique pour enseignants et étudiants</h1>
             <p class="animation_flechs">>>>>></p>
-            <div><a href="nvCompte.php" class="nv_compte">Commencer</a></div>
+            <div><a href="/php_briefs/Minerva_binomes/register" class="nv_compte">Commencer</a></div>
         </section>
         <section class="section_imgs">
             <div class="cercle_blue"></div>

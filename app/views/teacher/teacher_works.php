@@ -192,53 +192,62 @@
                 <h1>Travaux & Devoirs</h1>
                 <p style="color: #666;">Gérez les devoirs assignés à vos classes</p>
             </div>
-            <a href="teacher_assign_work.php" class="btn_primary"><i class="fa-solid fa-plus"></i> Nouveau Devoir</a>
+            <a href="/php_briefs/Minerva_binomes/teacher/assignments/create" class="btn_primary"><i
+                    class="fa-solid fa-plus"></i> Nouveau Devoir</a>
         </div>
 
-        <div class="works_container">
-            <!-- PHP Loop -->
-            <div class="work_item">
-                <div class="work_info">
-                    <div class="work_icon"><i class="fa-solid fa-file-code"></i></div>
-                    <div class="work_details">
-                        <h4>Création Landing Page</h4>
-                        <p>Dev Web Fullstack - Section A</p>
-                    </div>
-                </div>
-                <div class="work_meta">
-                    <span><i class="fa-regular fa-calendar"></i> Due: 25 Jan 2024</span>
-                    <span><i class="fa-solid fa-upload"></i> 18/24 Soumis</span>
-                </div>
-                <div class="work_actions">
-                    <a href="teacher_grade_work.php?id=1" class="btn_icon" title="Noter"><i
-                            class="fa-solid fa-check-to-slot"></i></a>
-                    <a href="#" class="btn_icon" title="Modifier"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#" class="btn_icon" title="Supprimer" style="color: #ff6b6b;"><i
-                            class="fa-solid fa-trash"></i></a>
-                </div>
+        <?php if (isset($_SESSION['success'])): ?>
+            <div style="background: #e6fffa; color: #00cc99; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <?= $_SESSION['success'];
+                unset($_SESSION['success']); ?>
             </div>
+        <?php endif; ?>
 
-            <div class="work_item">
-                <div class="work_info">
-                    <div class="work_icon"><i class="fa-solid fa-database"></i></div>
-                    <div class="work_details">
-                        <h4>Schéma Relationnel - Projet E-com</h4>
-                        <p>Base de Données - Section B</p>
+        <div class="works_container">
+            <?php if (isset($assignments) && !empty($assignments)): ?>
+                <?php foreach ($assignments as $assignment): ?>
+                    <div class="work_item">
+                        <div class="work_info">
+                            <div class="work_icon">
+                                <?php
+                                $icon = 'fa-file-lines';
+                                if (strpos(strtolower($assignment['title']), 'landing') !== false)
+                                    $icon = 'fa-file-code';
+                                if (strpos(strtolower($assignment['title']), 'base') !== false)
+                                    $icon = 'fa-database';
+                                ?>
+                                <i class="fa-solid <?= $icon ?>"></i>
+                            </div>
+                            <div class="work_details">
+                                <h4><?= htmlspecialchars($assignment['title']) ?></h4>
+                                <p><?= htmlspecialchars($assignment['class_name']) ?></p>
+                            </div>
+                        </div>
+                        <div class="work_meta">
+                            <span><i class="fa-regular fa-calendar"></i> Assigné le:
+                                <?= date('d M Y', strtotime($assignment['created_at'])) ?></span>
+                            <span><i class="fa-solid fa-paperclip"></i>
+                                <?= $assignment['file_path'] ? 'Fichier joint' : 'Pas de fichier' ?></span>
+                        </div>
+                        <div class="work_actions">
+                            <a href="/php_briefs/Minerva_binomes/teacher/grade?id=<?= $assignment['id'] ?>" class="btn_icon"
+                                title="Noter"><i class="fa-solid fa-check-to-slot"></i></a>
+                            <a href="/php_briefs/Minerva_binomes/teacher/assignments/edit?id=<?= $assignment['id'] ?>"
+                                class="btn_icon" title="Modifier"><i class="fa-solid fa-pen"></i></a>
+                            <a href="/php_briefs/Minerva_binomes/teacher/assignments/delete?id=<?= $assignment['id'] ?>"
+                                class="btn_icon" title="Supprimer" style="color: #ff6b6b;"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce devoir ?')">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
                     </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div style="text-align: center; padding: 50px; background: white; border-radius: 10px; color: #888;">
+                    <i class="fa-solid fa-folder-open" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
+                    <p>Aucun devoir n'a été créé pour le moment.</p>
                 </div>
-                <div class="work_meta">
-                    <span><i class="fa-regular fa-calendar"></i> Due: 30 Jan 2024</span>
-                    <span><i class="fa-solid fa-upload"></i> 5/18 Soumis</span>
-                </div>
-                <div class="work_actions">
-                    <a href="teacher_grade_work.php?id=2" class="btn_icon" title="Noter"><i
-                            class="fa-solid fa-check-to-slot"></i></a>
-                    <a href="#" class="btn_icon" title="Modifier"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#" class="btn_icon" title="Supprimer" style="color: #ff6b6b;"><i
-                            class="fa-solid fa-trash"></i></a>
-                </div>
-            </div>
-            <!-- End PHP Loop -->
+            <?php endif; ?>
         </div>
     </div>
 

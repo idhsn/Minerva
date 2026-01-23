@@ -14,7 +14,13 @@ class ClassModel extends Model
 
     public function getAllByTeacher($teacherId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM classes WHERE teacher_id = ?");
+        $stmt = $this->db->prepare("
+            SELECT c.*, COUNT(cs.student_id) as student_count 
+            FROM classes c 
+            LEFT JOIN class_students cs ON c.id = cs.class_id 
+            WHERE c.teacher_id = ? 
+            GROUP BY c.id
+        ");
         $stmt->execute([$teacherId]);
         return $stmt->fetchAll();
     }

@@ -190,9 +190,10 @@
                 <p style="color: #666;">Gérez vos classes et vos étudiants</p>
                 <?php $succes = \App\Core\Auth::getFlash('succes');
                 if ($succes): ?>
-                        <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-top: 10px; border: 1px solid #c3e6cb;">
-                            <i class="fa-solid fa-circle-check"></i> <?= $succes ?>
-                        </div>
+                    <div
+                        style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-top: 10px; border: 1px solid #c3e6cb;">
+                        <i class="fa-solid fa-circle-check"></i> <?= $succes ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <button class="btn_primary" onclick="toggleModal('createClassModal')"><i class="fa-solid fa-plus"></i>
@@ -212,13 +213,15 @@
                             <p style="color: #555; margin-bottom: 15px; font-size: 0.95rem;">Cliquez pour gérer les
                                 étudiants ou assigner des travaux.</p>
                             <div class="class_stats">
-                                <span><i class="fa-solid fa-users"></i> {{ ? }} Étudiants</span>
-                                <span><i class="fa-solid fa-book"></i> {{ ? }} Modules</span>
+                                <span><i class="fa-solid fa-users"></i> <?= $class['student_count'] ?? 0 ?> Étudiants</span>
+                                <span><i class="fa-solid fa-book"></i> -- Modules</span>
                             </div>
                         </div>
                         <div class="class_footer">
-                            <a href="teacher_students.php?class_id=<?= $class['id'] ?>" class="btn_sm">Étudiants</a>
-                            <a href="teacher_works.php?class_id=<?= $class['id'] ?>" class="btn_sm">Travaux</a>
+                            <a href="/php_briefs/Minerva_binomes/teacher/students?class_id=<?= $class['id'] ?>"
+                                class="btn_sm">Étudiants</a>
+                            <a href="/php_briefs/Minerva_binomes/teacher/assignments?class_id=<?= $class['id'] ?>"
+                                class="btn_sm">Travaux</a>
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -51,12 +51,15 @@ class TeacherController extends Controller
         ]);
     }
 
-    public function createStudent()
+    public function manageStudents()
     {
+        $user = Auth::user();
+        $classId = $_GET['class_id'] ?? 0;
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
             $email = $_POST['email'] ?? '';
-            $classId = $_POST['class_id'] ?? 0;
+            $selectedClassId = $_POST['class_id'] ?? 0;
             $password = \App\Services\AuthService::generateRandomPassword();
 
             $data = [
@@ -65,24 +68,31 @@ class TeacherController extends Controller
                 'password' => $password
             ];
 
-            if ($this->classService->createStudent($data, $classId)) {
-                $user = Auth::user();
+            if ($this->classService->createStudent($data, $selectedClassId)) {
                 $classes = $this->classService->getTeacherClasses($user['id']);
-                $students = $this->classService->getStudentsByTeacher($user['id']);
+                $students = $classId ? $this->classService->getStudentsByClass($classId) : $this->classService->getStudentsByTeacher($user['id']);
+
                 $this->view('teacher/teacher_students', [
                     'success' => "Étudiant créé avec succès. Mot de passe: $password",
                     'classes' => $classes,
-                    'students' => $students
+                    'students' => $students,
+                    'user' => $user
                 ]);
                 return;
             }
         }
-        $user = Auth::user();
+
         $classes = $this->classService->getTeacherClasses($user['id']);
-        $students = $this->classService->getStudentsByTeacher($user['id']);
+        if ($classId) {
+            $students = $this->classService->getStudentsByClass($classId);
+        } else {
+            $students = $this->classService->getStudentsByTeacher($user['id']);
+        }
+
         $this->view('teacher/teacher_students', [
             'classes' => $classes,
-            'students' => $students
+            'students' => $students,
+            'user' => $user
         ]);
     }
     public function createAssignment()
@@ -106,5 +116,81 @@ class TeacherController extends Controller
         $user = Auth::user();
         $classes = $this->classService->getTeacherClasses($user['id']);
         $this->view('teacher/teacher_assign_work', ['classes' => $classes]);
+    }
+
+    public function listAssignments()
+    {
+        $user = Auth::user();
+        $classId = $_GET['class_id'] ?? 0;
+        $classes = $this->classService->getTeacherClasses($user['id']);
+
+        if ($classId) {
+            $assignments = $this->assignmentService->getAssignmentsForClass($classId);
+        } else {
+            $assignments = $this->assignmentService->getAssignmentsForTeacher($user['id']);
+        }
+
+        $this->view('teacher/teacher_works', [
+            'classes' => $classes,
+            'user' => $user,
+            'classId' => $classId,
+            'assignments' => $assignments
+        ]);
+    }
+
+    public function editAssignment()
+    {
+        $user = Auth::user();
+        $id = $_GET['id'] ?? 0;
+        $assignment = $this->assignmentService->getAssignment($id);
+
+        if (!$assignment || $assignment['teacher_id'] !== $user['id']) {
+            $this->redirect('/php_briefs/Minerva_binomes/teacher/assignments');
+        }
+
+        $classes = $this->classService->getTeacherClasses($user['id']);
+        $this->view('teacher/teacher_assign_work', [
+            'assignment' => $assignment,
+            'classes' => $classes,
+            'user' => $user
+        ]);
+    }
+
+    public function updateAssignment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'] ?? 0;
+            $title = $_POST['title'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $classId = $_POST['class_id'] ?? 0;
+            $user = Auth::user();
+
+            $filePath = null;
+            if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+                $uploader = new \App\Utils\FileUploader('uploads/assignments/');
+                $filePath = $uploader->upload($_FILES['file']);
+            }
+
+            if ($this->assignmentService->updateAssignment($id, $title, $description, $filePath, $classId)) {
+                Auth::setFlash('success', 'Le devoir a été modifié avec succès !');
+                $this->redirect('/php_briefs/Minerva_binomes/teacher/assignments');
+            }
+        }
+    }
+
+    public function deleteAssignment()
+    {
+        $user = Auth::user();
+        $id = $_GET['id'] ?? 0;
+        $assignment = $this->assignmentService->getAssignment($id);
+
+        if ($assignment && $assignment['teacher_id'] === $user['id']) {
+            if ($this->assignmentService->deleteAssignment($id)) {
+                Auth::setFlash('success', 'Le devoir a été supprimé avec succès !');
+            } else {
+                Auth::setFlash('error', 'Erreur lors de la suppression.');
+            }
+        }
+        $this->redirect('/php_briefs/Minerva_binomes/teacher/assignments');
     }
 }

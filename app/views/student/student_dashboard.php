@@ -232,7 +232,7 @@
             <div class="content_card">
                 <div class="section_title">
                     <span>Travaux à rendre prochainement</span>
-                    <a href="/minerva_binomes/student/assignments"
+                    <a href="/php_briefs/Minerva_binomes/student/assignments"
                         style="font-size: 0.8rem; color: #5ABDF1; text-decoration: none;">Voir tout</a>
                 </div>
 
@@ -248,7 +248,7 @@
                                 <h4><?= htmlspecialchars($assignment['title']) ?></h4>
                                 <p><?= htmlspecialchars(substr($assignment['description'], 0, 60)) ?>...</p>
                             </div>
-                            <a href="/minerva_binomes/student/submit?id=<?= $assignment['id'] ?>"
+                            <a href="/php_briefs/Minerva_binomes/student/submit?id=<?= $assignment['id'] ?>"
                                 style="margin-left: auto; padding: 5px 15px; background: #5ABDF1; color: white; border-radius: 5px; text-decoration: none; font-size: 0.8rem;">Soumettre</a>
                         </div>
                     <?php endforeach; ?>

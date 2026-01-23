@@ -198,7 +198,7 @@
                 <?php endif; ?>
             </div>
 
-            <form class="chat_input_area" action="/minerva_binomes/chat/send" method="POST">
+            <form class="chat_input_area" action="/php_briefs/Minerva_binomes/chat/send" method="POST">
                 <input type="hidden" name="class_id" value="<?= $classId ?>">
                 <input type="text" name="message" placeholder="Écrivez votre message..." required>
                 <button type="submit" class="send_btn"><i class="fa-solid fa-paper-plane"></i></button>

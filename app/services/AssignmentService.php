@@ -26,9 +26,24 @@ class AssignmentService
         return $this->assignmentModel->getByClass($classId);
     }
 
+    public function getAssignmentsForTeacher($teacherId)
+    {
+        return $this->assignmentModel->getByTeacher($teacherId);
+    }
+
     public function getAssignment($id)
     {
         return $this->assignmentModel->find($id);
+    }
+
+    public function updateAssignment($id, $title, $description, $filePath, $classId)
+    {
+        return $this->assignmentModel->update($id, $title, $description, $filePath, $classId);
+    }
+
+    public function deleteAssignment($id)
+    {
+        return $this->assignmentModel->delete($id);
     }
 
     public function submitWork($assignmentId, $studentId, $content, $filePath)

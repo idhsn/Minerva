@@ -181,7 +181,8 @@
                         <h3 class="work_title"><?= htmlspecialchars($assignment['title']) ?></h3>
                         <p class="work_desc"><?= htmlspecialchars($assignment['description']) ?></p>
                         <div class="work_footer">
-                            <a href="/minerva_binomes/student/submit?id=<?= $assignment['id'] ?>" class="btn_action">Détails /
+                            <a href="/php_briefs/Minerva_binomes/student/submit?id=<?= $assignment['id'] ?>"
+                                class="btn_action">Détails /
                                 Soumettre</a>
                         </div>
                     </div>
