@@ -1,8 +1,6 @@
 <?php
-require_once __DIR__ . '/../../../services/AuthService.php';
-require_once __DIR__ . '/../../../services/SubmissionService.php';
+require_once __DIR__ . '/../../services/AuthService.php';
 $authService = new AuthService();
-$submissionService = new SubmissionService();
 $user = $authService->getCurrentUser();
 ?>
 <!DOCTYPE html>
@@ -10,7 +8,7 @@ $user = $authService->getCurrentUser();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Works</title>
+    <title>My Classmates</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -30,35 +28,25 @@ $user = $authService->getCurrentUser();
     </nav>
 
     <div class="container mt-4">
-        <h2>My Assigned Works</h2>
+        <h2>My Classmates</h2>
+        <?php if ($className): ?>
+            <p class="text-muted">Class: <strong><?= htmlspecialchars($className) ?></strong></p>
+        <?php endif; ?>
 
-        <?php if (empty($works)): ?>
+        <?php if (empty($classmates)): ?>
             <div class="alert alert-info mt-3">
-                No works assigned to you yet.
+                <?= $user->class_id ? 'No other students in your class yet.' : 'You are not assigned to any class yet.' ?>
             </div>
         <?php else: ?>
             <div class="row mt-3">
-                <?php foreach ($works as $work): ?>
-                    <?php 
-                    $submission = $submissionService->getSubmissionByWorkAndStudent($work->id, $user->id);
-                    ?>
-                    <div class="col-md-6 mb-3">
+                <?php foreach ($classmates as $classmate): ?>
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><?= htmlspecialchars($work->title) ?></h5>
-                                <p class="card-text"><?= htmlspecialchars($work->description) ?></p>
-                                
-                                <?php if ($submission): ?>
-                                    <?php if ($submission->isGraded()): ?>
-                                        <span class="badge bg-success">Graded: <?= $submission->grade ?>/20</span>
-                                    <?php else: ?>
-                                        <span class="badge bg-info">Submitted - Awaiting Grade</span>
-                                    <?php endif; ?>
-                                <?php else: ?>
-                                    <span class="badge bg-warning">Not Submitted</span>
-                                    <br>
-                                    <a href="/student/works/submit?id=<?= $work->id ?>" class="btn btn-sm btn-primary mt-2">Submit Work</a>
-                                <?php endif; ?>
+                                <h5 class="card-title"><?= htmlspecialchars($classmate->getFullName()) ?></h5>
+                                <p class="card-text">
+                                    <small class="text-muted">📧 <?= htmlspecialchars($classmate->email) ?></small>
+                                </p>
                             </div>
                         </div>
                     </div>

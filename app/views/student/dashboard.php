@@ -18,6 +18,8 @@ $user = $authService->getCurrentUser();
             <div>
                 <a href="/student/works" class="btn btn-outline-light btn-sm me-2">My Works</a>
                 <a href="/student/grades" class="btn btn-outline-light btn-sm me-2">Grades</a>
+                <a href="/student/classmates" class="btn btn-outline-light btn-sm me-2">Classmates</a>
+                <a href="/chat" class="btn btn-outline-light btn-sm me-2">Chat</a>
                 <span class="text-white me-3">Welcome, <?= $user->getFullName() ?></span>
                 <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
             </div>
@@ -28,7 +30,7 @@ $user = $authService->getCurrentUser();
         <h1>Welcome Student! 🎓</h1>
         
         <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">My Works</h5>
@@ -38,12 +40,32 @@ $user = $authService->getCurrentUser();
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">My Grades</h5>
                         <p class="card-text">View your grades and feedback</p>
                         <a href="/student/grades" class="btn btn-primary">View Grades</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">My Classmates</h5>
+                        <p class="card-text">See who's in your class</p>
+                        <a href="/student/classmates" class="btn btn-primary">View Classmates</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Chat</h5>
+                        <p class="card-text">Chat with your class</p>
+                        <a href="/chat" class="btn btn-primary">Open Chat</a>
                     </div>
                 </div>
             </div>

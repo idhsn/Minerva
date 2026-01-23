@@ -157,4 +157,31 @@ class StudentController
 
         require_once __DIR__ . '/../views/student/grades.php';
     }
+
+    public function classmates()
+{
+    if (!$this->authService->isStudent()) {
+        header('Location: /login');
+        exit;
+    }
+
+    $user = $this->authService->getCurrentUser();
+    
+    if (!$user->class_id) {
+        $classmates = [];
+        $className = null;
+    } else {
+        $classmates = $this->studentService->getStudentsByClassId($user->class_id);
+        $class = $this->classService->getClassWithStudentCount($user->class_id);
+        $className = $class ? $class->name : 'Unknown';
+        
+        // Remove current user from list
+        $classmates = array_filter($classmates, function($student) use ($user) {
+            return $student->id !== $user->id;
+        });
+    }
+
+    require_once __DIR__ . '/../views/student/classmates.php';
+}
+
 }

@@ -39,12 +39,20 @@ $router->get('/teacher/attendance/take', ['AttendanceController', 'take']);
 $router->post('/teacher/attendance/take', ['AttendanceController', 'take']);
 $router->get('/teacher/attendance/stats', ['AttendanceController', 'stats']);
 
+// Statistics routes
+$router->get('/teacher/statistics', ['StatisticsController', 'index']);
+
 // Student routes
 $router->get('/student/dashboard', ['StudentController', 'dashboard']);
 $router->get('/student/works', ['StudentController', 'works']);
 $router->get('/student/works/submit', ['StudentController', 'submitWork']);
 $router->post('/student/works/submit', ['StudentController', 'submitWork']);
 $router->get('/student/grades', ['StudentController', 'grades']);
+$router->get('/student/classmates', ['StudentController', 'classmates']);
+
+// Chat routes (both teacher and student)
+$router->get('/chat', ['ChatController', 'index']);
+$router->post('/chat', ['ChatController', 'index']);
 
 // Dispatch
 $uri = $_SERVER['REQUEST_URI'];

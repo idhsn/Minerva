@@ -23,7 +23,7 @@ $user = $authService->getCurrentUser();
     </nav>
 
     <div class="container mt-5">
-        <h1>Welcome Teacher! 👨‍🏫</h1>
+        <h1>Welcome <?= $user->getFullName() ?> 👨‍🏫</h1>
         
         <div class="row mt-4">
             <div class="col-md-3">
@@ -65,6 +65,24 @@ $user = $authService->getCurrentUser();
                     </div>
                 </div>
             </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Statistics</h5>
+                            <p class="card-text">View class statistics</p>
+                            <a href="/teacher/statistics" class="btn btn-primary">View Stats</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Chat</h5>
+                            <p class="card-text">Class group chat</p>
+                            <a href="/chat" class="btn btn-primary">Open Chat</a>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </body>

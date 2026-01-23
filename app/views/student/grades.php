@@ -19,6 +19,8 @@ $user = $authService->getCurrentUser();
                 <a href="/student/dashboard" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
                 <a href="/student/works" class="btn btn-outline-light btn-sm me-2">My Works</a>
                 <a href="/student/grades" class="btn btn-outline-light btn-sm me-2">Grades</a>
+                <a href="/student/classmates" class="btn btn-outline-light btn-sm me-2">Classmates</a>
+                <a href="/chat" class="btn btn-outline-light btn-sm me-2">Chat</a>
                 <span class="text-white me-3"><?= $user->getFullName() ?></span>
                 <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
             </div>
