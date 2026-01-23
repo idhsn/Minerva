@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    require __DIR__ . '/../partiels/header.php';
+    require APPROOT . '/app/views/partiels/header.php';
     ?>
 
     <main>

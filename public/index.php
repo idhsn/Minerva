@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+define('APPROOT', dirname(__DIR__));
+
 
 // Autoloading classes (simplified for now as we don't have composer auto-generated yet)
 spl_autoload_register(function ($class) {

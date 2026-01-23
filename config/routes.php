@@ -15,6 +15,7 @@ return function ($router) {
 
     // Teacher routes
     $router->get('/teacher/dashboard', ['TeacherController', 'dashboard']);
+    $router->get('/teacher/classes', ['TeacherController', 'createClass']);
     $router->get('/teacher/classes/create', ['TeacherController', 'createClass']);
     $router->post('/teacher/classes/create', ['TeacherController', 'createClass']);
     $router->get('/teacher/students', ['TeacherController', 'createStudent']);

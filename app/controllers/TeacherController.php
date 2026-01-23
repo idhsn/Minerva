@@ -36,14 +36,19 @@ class TeacherController extends Controller
 
     public function createClass()
     {
+        $user = Auth::user();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
-            $user = Auth::user();
             if ($this->classService->createClass($name, $user['id'])) {
-                $this->redirect('/php_briefs/Minerva_binomes/teacher/dashboard');
+                Auth::setFlash('succes', 'La classe a été créée avec succès !');
+                $this->redirect('/php_briefs/Minerva_binomes/teacher/classes');
             }
         }
-        $this->view('teacher/teacher_classes');
+        $classes = $this->classService->getTeacherClasses($user['id']);
+        $this->view('teacher/teacher_classes', [
+            'classes' => $classes,
+            'user' => $user
+        ]);
     }
 
     public function createStudent()
@@ -60,30 +65,25 @@ class TeacherController extends Controller
                 'password' => $password
             ];
 
-            $studentId = $this->classService->createStudent($data);
-            if ($studentId) {
-                // Link to class
-                if ($classId) {
-                    $this->classService->assignStudentToClass($classId, $studentId);
-                }
-
-                // Send Welcome Email
-                \App\Services\EmailService::sendWelcomeEmail($email, $name, $password);
-
-                $success = "Étudiant créé avec succès. Un email de bienvenue a été envoyé à $email avec le mot de passe : <strong>$password</strong>";
-
+            if ($this->classService->createStudent($data, $classId)) {
                 $user = Auth::user();
                 $classes = $this->classService->getTeacherClasses($user['id']);
+                $students = $this->classService->getStudentsByTeacher($user['id']);
                 $this->view('teacher/teacher_students', [
-                    'success' => $success,
-                    'classes' => $classes
+                    'success' => "Étudiant créé avec succès. Mot de passe: $password",
+                    'classes' => $classes,
+                    'students' => $students
                 ]);
                 return;
             }
         }
         $user = Auth::user();
         $classes = $this->classService->getTeacherClasses($user['id']);
-        $this->view('teacher/teacher_students', ['classes' => $classes]);
+        $students = $this->classService->getStudentsByTeacher($user['id']);
+        $this->view('teacher/teacher_students', [
+            'classes' => $classes,
+            'students' => $students
+        ]);
     }
     public function createAssignment()
     {

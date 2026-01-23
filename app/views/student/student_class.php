@@ -163,7 +163,7 @@
 
 <body>
 
-    <?php include '../partiels/sidebar_student.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_student.php'; ?>
 
     <div class="main_content">
         <div class="section_header">

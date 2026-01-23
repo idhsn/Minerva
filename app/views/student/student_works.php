@@ -156,7 +156,7 @@
 
 <body>
 
-    <?php include __DIR__ . '/../partiels/sidebar_student.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_student.php'; ?>
 
     <div class="main_content">
         <div class="section_header">

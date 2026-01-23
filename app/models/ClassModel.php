@@ -53,4 +53,17 @@ class ClassModel extends Model
         $stmt->execute([$studentId]);
         return $stmt->fetchAll();
     }
+
+    public function getStudentsByTeacher($teacherId)
+    {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT u.*, c.name as class_name 
+            FROM users u 
+            JOIN class_students cs ON u.id = cs.student_id 
+            JOIN classes c ON cs.class_id = c.id 
+            WHERE c.teacher_id = ?
+        ");
+        $stmt->execute([$teacherId]);
+        return $stmt->fetchAll();
+    }
 }

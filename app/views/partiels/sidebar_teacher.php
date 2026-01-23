@@ -11,7 +11,7 @@
             </a>
         </li>
         <li>
-            <a href="/php_briefs/Minerva_binomes/teacher/classes/create">
+            <a href="/php_briefs/Minerva_binomes/teacher/classes">
                 <i class="fa-solid fa-chalkboard-user"></i>
                 <span class="links_name">Classes</span>
             </a>

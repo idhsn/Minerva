@@ -188,7 +188,7 @@
 
 <body>
 
-    <?php require __DIR__ . '/../partiels/sidebar_teacher.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_teacher.php'; ?>
 
     <div class="main_content">
         <div class="section_header">
@@ -226,9 +226,11 @@
                         <select name="class_id"
                             style="width:100%; padding:10px; border-radius:5px; border:1px solid #ddd;" required>
                             <option value="">Sélectionner une classe</option>
-                            <?php foreach ($classes as $class): ?>
-                                <option value="<?= $class['id'] ?>"><?= $class['name'] ?></option>
-                            <?php endforeach; ?>
+                            <?php if (isset($classes)): ?>
+                                <?php foreach ($classes as $class): ?>
+                                    <option value="<?= $class['id'] ?>"><?= $class['name'] ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </select>
                     </div>
                     <div style="margin-top:20px; display:flex; justify-content:space-between;">
@@ -272,46 +274,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- PHP Foreach Loop -->
-                    <tr>
-                        <td>
-                            <div class="user_cell">
-                                <div class="user_img"><img
-                                        src="/php_briefs/Minerva_binomes/public/imgs/profile-placeholder.png" alt="">
-                                </div>
-                                <span>{{ Nom Étudiant }}</span>
-                            </div>
-                        </td>
-                        <td>student@example.com</td>
-                        <td>Dev Web Fullstack</td>
-                        <td>12 Jan 2024</td>
-                        <td><span class="status_badge status_active">Actif</span></td>
-                        <td>
-                            <i class="fa-solid fa-envelope action_btn" title="Message"></i>
-                            <i class="fa-solid fa-chart-line action_btn" title="Performance"></i>
-                            <i class="fa-solid fa-trash action_btn" style="color:#ff6b6b;" title="Supprimer"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="user_cell">
-                                <div class="user_img"><img
-                                        src="/php_briefs/Minerva_binomes/public/imgs/profile-placeholder.png" alt="">
-                                </div>
-                                <span>{{ Nom Étudiant 2 }}</span>
-                            </div>
-                        </td>
-                        <td>student2@example.com</td>
-                        <td>Base de Données</td>
-                        <td>15 Jan 2024</td>
-                        <td><span class="status_badge status_active">Actif</span></td>
-                        <td>
-                            <i class="fa-solid fa-envelope action_btn" title="Message"></i>
-                            <i class="fa-solid fa-chart-line action_btn" title="Performance"></i>
-                            <i class="fa-solid fa-trash action_btn" style="color:#ff6b6b;" title="Supprimer"></i>
-                        </td>
-                    </tr>
-                    <!-- End Foreach -->
+                    <?php if (isset($students) && !empty($students)): ?>
+                        <?php foreach ($students as $student): ?>
+                            <tr>
+                                <td>
+                                    <div class="user_cell">
+                                        <div class="user_img">
+                                            <img src="/php_briefs/Minerva_binomes/public/imgs/logo.png" alt="">
+                                        </div>
+                                        <span><?= htmlspecialchars($student['name']) ?></span>
+                                    </div>
+                                </td>
+                                <td><?= htmlspecialchars($student['email']) ?></td>
+                                <td><?= htmlspecialchars($student['class_name'] ?? 'N/A') ?></td>
+                                <td><?= date('d M Y', strtotime($student['created_at'])) ?></td>
+                                <td><span class="status_badge status_active">Actif</span></td>
+                                <td>
+                                    <i class="fa-solid fa-envelope action_btn" title="Message"></i>
+                                    <i class="fa-solid fa-chart-line action_btn" title="Performance"></i>
+                                    <i class="fa-solid fa-trash action_btn" style="color:#ff6b6b;" title="Supprimer"></i>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Aucun étudiant trouvé</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

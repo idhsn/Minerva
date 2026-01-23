@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/partiels/header.php';
+require APPROOT . '/app/views/partiels/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -261,7 +261,7 @@ require __DIR__ . '/partiels/header.php';
     </section>
 
     <?php
-    require __DIR__ . '/partiels/footer.php';
+    require APPROOT . '/app/views/partiels/footer.php';
     ?>
 </body>
 

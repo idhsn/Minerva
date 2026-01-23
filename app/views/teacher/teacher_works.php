@@ -184,7 +184,7 @@
 
 <body>
 
-    <?php include '../partiels/sidebar_teacher.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_teacher.php'; ?>
 
     <div class="main_content">
         <div class="section_header">

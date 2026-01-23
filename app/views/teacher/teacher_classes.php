@@ -181,62 +181,102 @@
 
 <body>
 
-    <?php include '../partiels/sidebar_teacher.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_teacher.php'; ?>
 
     <div class="main_content">
         <div class="section_header">
             <div>
                 <h1>Mes Classes</h1>
                 <p style="color: #666;">Gérez vos classes et vos étudiants</p>
+                <?php $succes = \App\Core\Auth::getFlash('succes');
+                if ($succes): ?>
+                        <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-top: 10px; border: 1px solid #c3e6cb;">
+                            <i class="fa-solid fa-circle-check"></i> <?= $succes ?>
+                        </div>
+                <?php endif; ?>
             </div>
-            <button class="btn_primary" onclick="alert('Open Modal Create Class')"><i class="fa-solid fa-plus"></i>
+            <button class="btn_primary" onclick="toggleModal('createClassModal')"><i class="fa-solid fa-plus"></i>
                 Créer une classe</button>
         </div>
 
         <div class="classes_grid">
-            <!-- PHP Loop for Classes -->
-            <div class="class_card">
-                <div class="class_header">
-                    <h3>Développement Web Fullstack</h3>
-                    <p>Section A - 2023/2024</p>
-                    <div class="class_options"><i class="fa-solid fa-ellipsis-vertical"></i></div>
-                </div>
-                <div class="class_body">
-                    <p style="color: #555; margin-bottom: 15px; font-size: 0.95rem;">Cours complet sur HTML, CSS, JS et
-                        PHP pour débutants.</p>
-                    <div class="class_stats">
-                        <span><i class="fa-solid fa-users"></i> {{ 24 }} Étudiants</span>
-                        <span><i class="fa-solid fa-book"></i> {{ 12 }} Modules</span>
+            <?php if (isset($classes) && !empty($classes)): ?>
+                <?php foreach ($classes as $class): ?>
+                    <div class="class_card">
+                        <div class="class_header">
+                            <h3><?= htmlspecialchars($class['name']) ?></h3>
+                            <p>Section - 2023/2024</p>
+                            <div class="class_options"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                        </div>
+                        <div class="class_body">
+                            <p style="color: #555; margin-bottom: 15px; font-size: 0.95rem;">Cliquez pour gérer les
+                                étudiants ou assigner des travaux.</p>
+                            <div class="class_stats">
+                                <span><i class="fa-solid fa-users"></i> {{ ? }} Étudiants</span>
+                                <span><i class="fa-solid fa-book"></i> {{ ? }} Modules</span>
+                            </div>
+                        </div>
+                        <div class="class_footer">
+                            <a href="teacher_students.php?class_id=<?= $class['id'] ?>" class="btn_sm">Étudiants</a>
+                            <a href="teacher_works.php?class_id=<?= $class['id'] ?>" class="btn_sm">Travaux</a>
+                        </div>
                     </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: white; border-radius: 10px;">
+                    <i class="fa-solid fa-chalkboard"
+                        style="font-size: 3rem; color: #eee; margin-bottom: 15px; display: block;"></i>
+                    <p style="color: #888;">Vous n'avez pas encore créé de classe.</p>
                 </div>
-                <div class="class_footer">
-                    <a href="teacher_students.php?class_id=1" class="btn_sm">Étudiants</a>
-                    <a href="teacher_works.php?class_id=1" class="btn_sm">Travaux</a>
-                </div>
-            </div>
-
-            <div class="class_card">
-                <div class="class_header" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                    <h3>Base de Données SQL</h3>
-                    <p>Section B - 2023/2024</p>
-                    <div class="class_options"><i class="fa-solid fa-ellipsis-vertical"></i></div>
-                </div>
-                <div class="class_body">
-                    <p style="color: #555; margin-bottom: 15px; font-size: 0.95rem;">Conception et manipulation de bases
-                        de données relationnelles.</p>
-                    <div class="class_stats">
-                        <span><i class="fa-solid fa-users"></i> {{ 18 }} Étudiants</span>
-                        <span><i class="fa-solid fa-book"></i> {{ 8 }} Modules</span>
-                    </div>
-                </div>
-                <div class="class_footer">
-                    <a href="teacher_students.php?class_id=2" class="btn_sm">Étudiants</a>
-                    <a href="teacher_works.php?class_id=2" class="btn_sm">Travaux</a>
-                </div>
-            </div>
-            <!-- End PHP Loop -->
+            <?php endif; ?>
         </div>
     </div>
+
+    <!-- Create Class Modal -->
+    <div id="createClassModal"
+        style="display:none; position:fixed; z-index:1001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+        <div
+            style="background:white; margin:10% auto; padding:25px; width:400px; border-radius:12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="margin:0; color:#003049;">Créer une nouvelle classe</h3>
+                <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="toggleModal('createClassModal')"></i>
+            </div>
+            <form action="/php_briefs/Minerva_binomes/teacher/classes" method="POST">
+                <div style="margin-bottom:20px;">
+                    <label style="display:block; margin-bottom:8px; font-weight:500;">Nom de la classe</label>
+                    <input type="text" name="name" placeholder="Ex: Développement Web Fullstack"
+                        style="width:100%; padding:10px; border-radius:6px; border:1px solid #ddd; outline:none;"
+                        required>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:12px;">
+                    <button type="button" onclick="toggleModal('createClassModal')"
+                        style="background:#f1f1f1; color:#555; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;">Annuler</button>
+                    <button type="submit"
+                        style="background:#5ABDF1; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:500;">Créer
+                        la classe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.style.display === 'none') {
+                modal.style.display = 'block';
+            } else {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal if clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('createClassModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 

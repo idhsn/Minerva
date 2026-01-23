@@ -60,17 +60,12 @@ abstract class User extends Model
     {
         $rqt = "INSERT INTO users(name, email, password, role) VALUES(:name ,:email, :password, :role)";
         $res = $this->db->prepare($rqt);
-        if (
-            $res->execute([
-                ':name' => $this->nom,
-                ':email' => $this->email,
-                ':password' => password_hash($this->password, PASSWORD_DEFAULT),
-                ':role' => $this->role
-            ])
-        ) {
-            return $this->db->lastInsertId();
-        }
-        return false;
+        return $res->execute([
+            ':name' => $this->nom,
+            ':email' => $this->email,
+            ':password' => password_hash($this->password, PASSWORD_DEFAULT),
+            ':role' => $this->role
+        ]);
     }
 
     public function findByEmail($email)

@@ -172,7 +172,7 @@
 
 <body>
 
-    <?php include __DIR__ . '/../partiels/sidebar_teacher.php'; ?>
+    <?php include APPROOT . '/app/views/partiels/sidebar_teacher.php'; ?>
 
     <div class="main_content">
         <div class="chat_window">
